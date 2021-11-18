@@ -16,7 +16,7 @@ export default function Signup() {
   ];
   const addUser = () => {
     console.log(DATA);
-    fetch("http://localhost:5000/users", {
+    fetch("https://cms-node-b262.herokuapp.com/users", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

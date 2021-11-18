@@ -4,7 +4,7 @@ export default function FAQs() {
   const [faqs, setFaqs] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:5000/faq")
+    fetch("https://cms-node-b262.herokuapp.com/faq")
       .then((data) => data.json())
       .then((Faq) => setFaqs(Faq));
       console.log(faqs);

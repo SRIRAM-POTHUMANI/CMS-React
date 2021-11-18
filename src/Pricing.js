@@ -4,7 +4,7 @@ export default function Pricing() {
   const [Plans, setPlan] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:5000/pricing")
+    fetch("https://cms-node-b262.herokuapp.com/pricing")
       .then((data) => data.json())
       .then((Plan) => setPlan(Plan));
     console.log(Plans);
