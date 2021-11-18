@@ -1,66 +1,61 @@
-export default function Pricing(){
-    return (
-    <div className="container">
-        <header>
-    
-    <div class="pricing-header p-3 pb-md-4 mx-auto text-center">
-      <h1 class="display-4 fw-normal">Pricing</h1>
-      <p class="fs-5 text-muted">We give you 100s of templates, unlimited pages & top grade hosting FREE. Upgrade to Premium and get even more.</p>
-    </div>
-  </header>
- <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
-      <div class="col">
-        <div class="card mb-4 rounded-3 shadow-sm">
-          <div class="card-header py-3">
-            <h4 class="my-0 fw-normal">Free</h4>
-          </div>
-          <div class="card-body">
-            <h1 class="card-title pricing-card-title">$0<small class="text-muted fw-light">/mo</small></h1>
-            <ul class="list-unstyled mt-3 mb-4">
-              <li>10 users included</li>
-              <li>2 GB of storage</li>
-              <li>Email support</li>
-              <li>Help center access</li>
-            </ul>
-            <button type="button" class="w-100 btn btn-lg btn-outline-primary">Sign up for free</button>
-          </div>
+import { useEffect, useState } from "react";
+
+export default function Pricing() {
+  const [Plans, setPlan] = useState([]);
+
+  useEffect(() => {
+    fetch("http://localhost:5000/pricing")
+      .then((data) => data.json())
+      .then((Plan) => setPlan(Plan));
+    console.log(Plans);
+  }, []);
+
+  return (
+    <div className="container p-2 ">
+      <header>
+        <div class="pricing-header p-3 pb-md-4 mx-auto text-center">
+          <h1 class="display-4 fw-normal">Choose a plan</h1>
+          <p class="fs-5 text-muted">
+            Pick one that's right for you and unlock features that help you
+            grow.
+          </p>
         </div>
-      </div>
-      <div class="col">
-        <div class="card mb-4 rounded-3 shadow-sm">
-          <div class="card-header py-3">
-            <h4 class="my-0 fw-normal">Pro</h4>
-          </div>
-          <div class="card-body">
-            <h1 class="card-title pricing-card-title">$15<small class="text-muted fw-light">/mo</small></h1>
-            <ul class="list-unstyled mt-3 mb-4">
-              <li>20 users included</li>
-              <li>10 GB of storage</li>
-              <li>Priority email support</li>
-              <li>Help center access</li>
-            </ul>
-            <button type="button" class="w-100 btn btn-lg btn-primary">Get started</button>
-          </div>
-        </div>
-      </div>
-      <div class="col">
-        <div class="card mb-4 rounded-3 shadow-sm border-primary">
-          <div class="card-header py-3 text-white bg-primary border-primary">
-            <h4 class="my-0 fw-normal">Enterprise</h4>
-          </div>
-          <div class="card-body">
-            <h1 class="card-title pricing-card-title">$29<small class="text-muted fw-light">/mo</small></h1>
-            <ul class="list-unstyled mt-3 mb-4">
-              <li>30 users included</li>
-              <li>15 GB of storage</li>
-              <li>Phone and email support</li>
-              <li>Help center access</li>
-            </ul>
-            <button type="button" class="w-100 btn btn-lg btn-primary">Contact us</button>
-          </div>
-        </div>
+      </header>
+      <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
+        {Plans.map((Plan) => {
+          return (
+            <div class="col">
+              <div class={Plan.border_style}>
+                <div class={Plan.title_style}>
+                  <h4 class="my-0 fw-normal">{Plan.plan}</h4>
+                </div>
+                <div class="card-body">
+                  <h1 class="card-title pricing-card-title">
+                    ${Plan.monthly_price}<small class="text-muted fw-light">/mo</small>
+                  </h1>
+                  <ul class="list-group list-group-flush">
+                  <li class="list-group-item fw-bold">Features</li>
+
+                    {
+                      Plan.features.map((feature)=>{
+                        return (
+                          <li class="list-group-item">{feature}</li>
+                        );
+                      })
+                    }
+                  </ul>
+                  <button
+                    type="button"
+                    class={Plan.button_style}
+                  >
+                    Buy
+                  </button>
+                </div>
+              </div>
+            </div>
+          );
+        })}
       </div>
     </div>
-    </div>        
-    );
+  );
 }

@@ -1,19 +1,16 @@
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import FAQs from "./FAQs";
 import HomePage from "./HomePage";
+import { Redirect } from "react-router";
 import Pricing from "./Pricing";
-import Signin from "./Signin";import { Redirect } from 'react-router';
-
-import Signup from "./Signup";
-import UserHomePage from "./UserHomePage";
-// import ResponsiveDrawer from "./UserHomePage";
-// import NewRoute from "./UserHomePage";
-
-export default function Navbar() {
-  return (
-    <>
-      <Router>
-        <header class="p-3 sticky-top bg-primary text-white-warning  ">
+import { Login } from "@mui/icons-material";
+import PersistentDrawerLeft from "./UserEditPage";
+import FAQs from "./FAQs";
+import Signin from "./Signin";
+export default function UserHomePage(){
+    return(
+        <>
+        <Router>
+        <header class="p-3 bg-primary text-white-warning  ">
           <div class="container">
             <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
               <a
@@ -33,55 +30,61 @@ export default function Navbar() {
 
               <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
                 <li>
-                  <Link to="/Home" class="nav-link px-2 text-white">
+                  <Link to="/UserHome" class="nav-link px-2 text-white">
                     Home
                   </Link>
                 </li>
                 <li>
-                  <Link to="/Pricing" class="nav-link px-2 text-white">
+                  <Link to="/UserFeatures" class="nav-link px-2 text-white">
+                    Features
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/UserPricing" class="nav-link px-2 text-white">
                     Pricing
                   </Link>
                 </li>
                 <li>
-                  <Link to="/FAQs" class="nav-link px-2 text-white">
+                  <Link to="/UserFAQs" class="nav-link px-2 text-white">
                     FAQs
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/UserAbout" class="nav-link px-2 text-white">
+                    About
                   </Link>
                 </li>
               </ul>
 
               <div class="text-end">
-                <Link to="/Login" class="btn btn-outline-light me-2">
-                  Login
-                </Link>
-                <Link to="/Signup" class="btn btn-warning">
-                  Get Started
+                <Link to="/UserLogout" class="btn btn-light">
+                  Logout
                 </Link>
               </div>
             </div>
           </div>
         </header>
         <Switch>
-          <Redirect exact from ="/" to="/Home"/>
-          <Route path="/Home">
+          <Redirect exact from ="/UserHomePage" to="/UserHome"/>
+          <Route path="/UserHome">
+            <PersistentDrawerLeft />
+          </Route>
+          <Route path="/UserFeatures">
             <HomePage />
           </Route>
-          <Route path="/Pricing">
+          <Route path="/UserPricing">
             <Pricing />
           </Route>
-          <Route path="/FAQs">
+          <Route path="/UserFAQs">
             <FAQs />
           </Route>
-
-          <Route path="/Signup">
-            <Signup />
+          <Route path="/UserAbout">
+            <HomePage />
           </Route>
-          <Route path="/Login">
+          <Route path="/UserLogout">
             <Signin />
-          </Route>
-          <Route path="/UserHomePage">
           </Route>
         </Switch>
       </Router>
-    </>
-  );
+  </>    );
 }

@@ -1,7 +1,12 @@
 
 import SendIcon from '@mui/icons-material/Send';
+import { Link } from "react-router-dom";
 import Button from '@mui/material/Button';
+import { Redirect } from 'react-router';
+
 export default function Signin(){
+
+  
     return(
     <body class="text-center container w-50 p-5" style={{display: "block ruby"}}>
     
@@ -22,8 +27,9 @@ export default function Signin(){
           <label>
             <input type="checkbox" value="remember-me"/> Remember me
           </label>
-        <br/>
-          <Button variant="contained" endIcon={<SendIcon />}>Sign in</Button>
+        <br/><Link to="/UserHomePage">
+        <Button variant="contained" endIcon={<SendIcon />} onClick={<Redirect push to="/UserHomePage"/>}>Sign in</Button>
+        </Link>
        </div>
       </div>
     </main>

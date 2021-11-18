@@ -139,7 +139,7 @@ export default function Signup() {
                       <img
                         src="https://mdbootstrap.com/img/Photos/new-templates/bootstrap-registration/draw1.png"
                         class="img-fluid"
-                        alt="Sample image"
+                        alt="Sample"
                       />
                     </div>
                   </div>
